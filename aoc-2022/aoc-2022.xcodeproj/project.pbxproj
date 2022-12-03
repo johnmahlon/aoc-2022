@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		47189EF02939832700C777C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47189EEF2939832700C777C8 /* main.swift */; };
+		47189F08293B98CB00C777C8 /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47189F07293B98CB00C777C8 /* Day1.swift */; };
+		47189F0A293B993900C777C8 /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47189F09293B993900C777C8 /* Day2.swift */; };
+		47189F0C293B999500C777C8 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47189F0B293B999500C777C8 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		47189EEC2939832700C777C8 /* aoc-2022 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "aoc-2022"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47189EEF2939832700C777C8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		47189F07293B98CB00C777C8 /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
+		47189F09293B993900C777C8 /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
+		47189F0B293B999500C777C8 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				47189EEF2939832700C777C8 /* main.swift */,
+				47189F0B293B999500C777C8 /* Helper.swift */,
+				47189F07293B98CB00C777C8 /* Day1.swift */,
+				47189F09293B993900C777C8 /* Day2.swift */,
 			);
 			path = "aoc-2022";
 			sourceTree = "<group>";
@@ -131,7 +140,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47189F08293B98CB00C777C8 /* Day1.swift in Sources */,
+				47189F0A293B993900C777C8 /* Day2.swift in Sources */,
 				47189EF02939832700C777C8 /* main.swift in Sources */,
+				47189F0C293B999500C777C8 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

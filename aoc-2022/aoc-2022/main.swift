@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum Part {
+    case one
+    case two
+}
+
 // MARK: - Day 1
 func processData() -> [Int] {
     read(filename: "day1.txt")
@@ -31,65 +36,75 @@ print("---------------------------------------")
 
 
 // MARK: - Day 2
-let scoreGuide = [
-    "R": 1,
-    "P": 2,
-    "S": 3,
+enum Choice: Int {
+    case rock = 1
+    case paper = 2
+    case scissors = 3
+}
+
+enum GameResult: Int {
+    case win = 6
+    case loss = 0
+    case tie = 3
+}
+
+let encryptGuidePart1: [String: Choice] = [
+    "X": .rock,
+    "Y": .paper,
+    "Z": .scissors,
+    "A": .rock,
+    "B": .paper,
+    "C": .scissors
 ]
 
-let encryptGuide = [
-    "X": "R",
-    "Y": "P",
-    "Z": "S",
-    "A": "R",
-    "B": "P",
-    "C": "S"
-]
-
-func play(them: String, you: String) -> Int {
+func play(them: Choice, you: Choice) -> GameResult {
     // if you tie
     if them == you {
-        return 3
+        return .tie
     }
     
     // rock/scissor combo to handle wrapping
-    if them == "R" && you == "S" {
-        return 0
+    if them == .rock && you == .scissors {
+        return .loss
     }
     
-    if them == "S" && you == "R" {
-        return 6
+    if them == .scissors && you == .rock {
+        return .win
     }
     
     //otherwise, use score guide to compare
     // also force unwrap because this is aoc, not prod
-    if scoreGuide[you]! > scoreGuide [them]! {
-        return 6
+    if you.rawValue > them.rawValue {
+        return .win
     }
     
     // all other options, you lost
-    return 0
+    return .loss
 }
 
-func process() -> Int {
-    read(filename: "day2.txt")
-        .components(separatedBy: .newlines)
-        .map {
-            $0.components(separatedBy: .whitespaces)
-                .map {
-                    encryptGuide[$0]!
-                }
-        }
-        .map {
-            play(them: $0[0], you: $0[1]) + scoreGuide[$0[1]]!
-        }
-        .reduce(0, +)
+func process(part: Part) -> Int {
+    switch part {
+    case .one: return read(filename: "day2.txt")
+            .components(separatedBy: .newlines)
+            .map {
+                $0.components(separatedBy: .whitespaces)
+                    .map {
+                        encryptGuidePart1[$0]!
+                    }
+            }
+            .map {
+                play(them: $0[0], you: $0[1]).rawValue + $0[1].rawValue
+            }
+            .reduce(0, +)
+ 
         
+    case .two: return 0
+        
+    }
 }
 
 print("Day 2:")
-print(process())
-
+print(process(part: .one))
 
 
 // MARK: - Helpers

@@ -36,6 +36,7 @@ print("---------------------------------------")
 
 
 // MARK: - Day 2
+
 enum Choice: Int {
     case rock = 1
     case paper = 2
@@ -48,13 +49,19 @@ enum GameResult: Int {
     case tie = 3
 }
 
-let encryptGuidePart1: [String: Choice] = [
+let encryptGuide: [String: Choice] = [
     "X": .rock,
     "Y": .paper,
     "Z": .scissors,
     "A": .rock,
     "B": .paper,
     "C": .scissors
+]
+
+let encryptResultGuide: [String: GameResult] = [
+    "X": .loss,
+    "Y": .tie,
+    "Z": .win
 ]
 
 func play(them: Choice, you: Choice) -> GameResult {
@@ -82,6 +89,31 @@ func play(them: Choice, you: Choice) -> GameResult {
     return .loss
 }
 
+func play(them: Choice, result: GameResult) -> Choice {
+    switch result {
+    case .win:
+        if them == .scissors {
+            return .rock
+        } else if them == .rock {
+            return .paper
+        } else {
+            return .scissors
+        }
+        
+    case .tie: return them
+        
+    case .loss:
+        if them == .scissors {
+            return .paper
+        } else if them == .rock {
+            return .scissors
+        } else {
+            return .rock
+        }
+    }
+    
+}
+
 func process(part: Part) -> Int {
     switch part {
     case .one: return read(filename: "day2.txt")
@@ -89,7 +121,7 @@ func process(part: Part) -> Int {
             .map {
                 $0.components(separatedBy: .whitespaces)
                     .map {
-                        encryptGuidePart1[$0]!
+                        encryptGuide[$0]!
                     }
             }
             .map {
@@ -98,13 +130,24 @@ func process(part: Part) -> Int {
             .reduce(0, +)
  
         
-    case .two: return 0
-        
+    case .two: return read(filename: "day2.txt")
+            .components(separatedBy: .newlines)
+            .map {
+                $0.components(separatedBy: .whitespaces)
+            }
+            .map {
+                (encryptGuide[$0[0]]!, encryptResultGuide[$0[1]]!)
+            }
+            .map {
+                play(them: $0.0, result: $0.1).rawValue + $0.1.rawValue
+            }
+            .reduce(0, +)
     }
 }
 
 print("Day 2:")
 print(process(part: .one))
+print(process(part: .two))
 
 
 // MARK: - Helpers

@@ -43,10 +43,46 @@ struct Day3 {
                 }
                 .reduce(0, +)
             
-        case .two: Helper.read(filename: "day3_test.txt")
+        case .two:
+            var groups: [[String]] = []
+            
+            var count = 0
+            var temp = [String]()
+            
+            Helper.read(filename: "day3.txt")
                 .components(separatedBy: .newlines)
-                .forEach { print($0) }
-            return 0
+                .forEach {
+                    if count == 3 {
+                        groups.append(temp)
+                        temp = []
+                        count = 0
+                    }
+                    
+                    temp.append($0)
+                    count += 1
+                }
+            
+            groups.append(temp)
+            
+            return groups.map {
+                $0.map {
+                    return Set($0)
+                }
+            }
+            .map {
+                $0.reduce($0.first!) {
+                    $0.intersection($1)
+                }
+            }
+            .flatMap { $0 }
+            .map {
+                if $0.isUppercase {
+                    return Int($0.asciiValue! - 38)
+                } else {
+                    return Int($0.asciiValue! - 96)
+                }
+            }
+            .reduce(0, +)
         }
     }
 }

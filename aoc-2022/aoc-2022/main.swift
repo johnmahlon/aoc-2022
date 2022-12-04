@@ -29,7 +29,13 @@ print(Day2.process(part: .one))
 print(Day2.process(part: .two))
 print("---------------------------------------")
 
-//MARK: - Day 3
+// MARK: - Day 3
 print("Day 3:")
 print(Day3.process(part: .one))
 print(Day3.process(part: .two))
+print("---------------------------------------")
+
+
+// MARK: - Day 4
+print("Day 4:")
+print(Day4.process())

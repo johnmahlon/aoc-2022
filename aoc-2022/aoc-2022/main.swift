@@ -38,4 +38,5 @@ print("---------------------------------------")
 
 // MARK: - Day 4
 print("Day 4:")
-print(Day4.process())
+print(Day4.process(part: .one))
+print(Day4.process(part: .two))

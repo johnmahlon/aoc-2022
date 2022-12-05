@@ -8,23 +8,32 @@
 import Foundation
 
 struct Day4 {
-    static func process() -> Int {
+    static func process(part: Part) -> Int {
         Helper.read(filename: "day4.txt")
             .components(separatedBy: .newlines)
             .map {
                 $0.components(separatedBy: ",")
-                    .map { $0.components(separatedBy: "-") }
+                    .map {
+                        $0.components(separatedBy: "-")
+                            .map { Int($0)! }
+                    }
             }
-            .compactMap {
-                let firstSet = $0[0].map { Int($0)! }
-                let secondSet = $0[1].map { Int($0)! }
-                
-                return firstSet[0] >= secondSet[0] && firstSet[1] <= secondSet[1]
-                        || secondSet[0] >= firstSet[0] && secondSet[1] <= firstSet[1]
+            .filter { (s: [[Int]]) in
+                Day4.overlaps(part: part, s)
             }
-            .filter { $0 }
             .count
     }
+    
+    static func overlaps(part: Part, _ s: [[Int]]) -> Bool {
+        switch part {
+        case .one: return s[0][0] >= s[1][0] && s[0][1] <= s[1][1] || s[1][0] >= s[0][0] && s[1][1] <= s[0][1]
+        case .two: return s[0][1] >= s[1][0] && s[1][1] >= s[0][0]
+        }
+    }
 }
+
+
+
+
 
 
